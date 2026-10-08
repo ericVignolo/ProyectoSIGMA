@@ -1,105 +1,86 @@
 # SIGMA · Navegación con Expo Router
 
-Aplicación de práctica para gestionar equipos y tareas de mantenimiento. Implementa la actividad de navegación: un menú de inicio con **Equipos**, **Tareas** y **Nueva tarea**, enlaces mediante `Link` y una pantalla dinámica de detalle de equipos.
+Proyecto de práctica de navegación para SIGMA, una aplicación de gestión de mantenimiento.
 
 **Repositorio público:** [ericVignolo/ProyectoSIGMA](https://github.com/ericVignolo/ProyectoSIGMA).
 
 ## Funcionalidades
 
-- Menú principal con las tres opciones solicitadas.
-- Navegación mediante `Link` y una pila de pantallas con `Stack`.
-- Listado de tres equipos y detalle individual mediante la ruta `/equipos/[id]`.
-- Mensaje de equipo no encontrado para identificadores inexistentes.
-- Listado de tareas y formulario para crear una tarea asociada a un equipo.
-- Validación de la descripción antes de guardar.
-- Botones para volver al inicio y al listado de equipos.
+- Menú inicial con Equipos, Tareas y Nueva tarea.
+- Navegación con `Link` y `Stack` de Expo Router.
+- Dos equipos seleccionables.
+- Detalle que muestra el ID recibido mediante `[id].tsx`.
+- Enlaces para regresar entre pantallas.
+
+Tareas y Nueva tarea son pantallas de presentación. El alcance de esta actividad es la navegación; no se crean ni almacenan tareas.
 
 ## Tecnologías
 
-React Native, Expo SDK 57, Expo Router, React y TypeScript. Los estilos se definen con `StyleSheet` y las tareas se comparten entre pantallas mediante Context API.
+React Native, Expo SDK 57, Expo Router, React y TypeScript. Se utilizan componentes básicos y estilos mínimos de separación y tamaño de texto.
 
-## Requisitos y ejecución
+## Cómo ejecutarlo
 
-- Node.js y npm.
-- Un navegador para la versión web o un dispositivo/emulador compatible con la versión de Expo del proyecto.
-- El proyecto utiliza Expo SDK 57, siguiendo los ejemplos de clase.
-
-Clonar el repositorio y entrar a su carpeta:
+Se necesita Node.js y npm.
 
 ```bash
 git clone https://github.com/ericVignolo/ProyectoSIGMA.git
 cd ProyectoSIGMA
-```
-
-Instalar las dependencias e iniciar Expo:
-
-```bash
 npm install
 npm run start
 ```
 
-Para abrir la aplicación en un teléfono, escaneá el QR con una versión de Expo Go compatible con SDK 57. El teléfono y la computadora deben poder conectarse entre sí por la red. Para usar un emulador Android, iniciarlo previamente y presionar `a` en la terminal de Expo.
+En un teléfono, escanear el QR con Expo Go compatible con SDK 57. El dispositivo y la computadora deben poder conectarse por la red. Para usar un emulador Android, iniciarlo y presionar `a` en la terminal de Expo.
 
-Para ejecutar la versión web:
+Para ejecutar en el navegador:
 
 ```bash
 npm run web
 ```
 
-Abrir la dirección que indique Expo en la terminal. Si el navegador no se abre automáticamente, presionar `w`.
-
-Para comprobar los tipos:
+Abrir la dirección indicada por Expo. Para comprobar los tipos:
 
 ```bash
 npm run typecheck
 ```
 
-## Pantallas y estructura
+## Estructura
 
 ```text
 app/
-  _layout.tsx        Stack de navegación y proveedor de tareas
-  index.tsx          Menú de inicio
+  _layout.tsx       Stack de navegación
+  index.tsx         Menú principal
   equipos/
-    index.tsx        Listado de equipos
-    [id].tsx         Detalle por identificador
-  tareas.tsx         Listado de tareas
-  nueva-tarea.tsx    Formulario de creación
-components/UI.tsx   Componentes y estilos compartidos
-context/            Estado compartido de tareas
-data/equipos.ts     Equipos de ejemplo
-docs/capturas/      Capturas de la aplicación
+    index.tsx       Selección de equipos
+    [id].tsx        Detalle por ID
+  tareas.tsx        Pantalla de tareas
+  nueva-tarea.tsx   Pantalla de nueva tarea
+docs/capturas/      Capturas de la versión web
 app.json            Configuración de Expo
 package.json        Dependencias y comandos
 package-lock.json   Versiones fijadas de las dependencias
 tsconfig.json       Configuración de TypeScript
-.gitignore          Exclusiones del repositorio
+.gitignore          Exclusiones de Git
 ```
 
-| Pantalla | Ruta | Archivo |
-| --- | --- | --- |
-| Inicio | `/` | `app/index.tsx` |
-| Equipos | `/equipos` | `app/equipos/index.tsx` |
-| Detalle de equipo | `/equipos/1`, `/equipos/2`, `/equipos/3` | `app/equipos/[id].tsx` |
-| Tareas | `/tareas` | `app/tareas.tsx` |
-| Nueva tarea | `/nueva-tarea` | `app/nueva-tarea.tsx` |
+## Navegación
 
-Cada botón de navegación utiliza el componente `NavButton`, que combina `Link` de Expo Router con `Pressable` mediante `asChild`. En el listado de equipos se pasa `pathname: '/equipos/[id]'` y el parámetro `id`. La pantalla `[id].tsx` obtiene ese parámetro con `useLocalSearchParams` y busca el equipo correspondiente. Por ejemplo, `/equipos/2` muestra el compresor de aire. Un identificador desconocido muestra “Equipo no encontrado”.
+Expo Router genera las rutas a partir de los archivos en `app/`. El menú usa `Link` con `asChild` para que cada `Pressable` navegue al tocar su texto.
 
-El formulario permite seleccionar un equipo y guardar una tarea con descripción obligatoria. Después de guardarla, `router.replace('/tareas')` muestra el listado actualizado. Las tareas se mantienen en memoria: al recargar la aplicación se restablecen los datos de ejemplo. No se requiere una API ni una base de datos.
+Los enlaces de Equipos utilizan `pathname: '/equipos/[id]'` y envían el ID mediante `params`. Equipo 1 abre `/equipos/1` y Equipo 2 abre `/equipos/2`. La pantalla `[id].tsx` obtiene el parámetro con `useLocalSearchParams` y lo muestra.
 
-## Verificación de la actividad
+`_layout.tsx` configura el `Stack`, que organiza las pantallas, sus títulos y el botón de regreso.
 
-1. Abrir Inicio y comprobar sus tres botones.
-2. Pulsar Equipos y abrir el detalle de cada equipo. Verificar que cambian nombre, identificador, ubicación y estado.
-3. Volver al inicio y abrir Tareas.
-4. Abrir Nueva tarea, seleccionar un equipo y guardar una descripción. Verificar que aparece en Tareas.
-5. Intentar guardar una descripción vacía y comprobar el mensaje de validación.
-6. En web, visitar `/equipos/999` y comprobar el mensaje de equipo no encontrado.
+## Verificación
 
-## Capturas de pantalla
+1. Desde Inicio, abrir Equipos.
+2. Seleccionar Equipo 1 y comprobar que el detalle muestra ID 1.
+3. Volver a Equipos, seleccionar Equipo 2 y comprobar que muestra ID 2.
+4. Volver al inicio y abrir Tareas.
+5. Volver al inicio y abrir Nueva tarea.
 
-Capturas reales de la versión web en ejecución:
+Las capturas documentan la versión web. La comprobación de TypeScript se ejecuta con `npm run typecheck`.
+
+## Capturas
 
 ### Inicio
 
@@ -109,43 +90,32 @@ Capturas reales de la versión web en ejecución:
 
 ![Equipos](docs/capturas/equipos.jpg)
 
-### Detalle mediante ruta dinámica
+### Detalle de Equipo 1
 
-![Detalle dinámico del equipo 2](docs/capturas/detalle-equipo.jpg)
+![Detalle de Equipo 1](docs/capturas/detalle-equipo-1.jpg)
+
+### Detalle de Equipo 2
+
+![Detalle de Equipo 2](docs/capturas/detalle-equipo.jpg)
 
 ### Tareas
 
-![Tareas con una nueva tarea guardada](docs/capturas/tareas.jpg)
+![Tareas](docs/capturas/tareas.jpg)
 
 ### Nueva tarea
 
 ![Nueva tarea](docs/capturas/nueva-tarea.jpg)
 
-## Comprobaciones realizadas
+## Archivos y commits
 
-- `npm run typecheck`: sin errores.
-- Navegación desde Inicio a Equipos y Nueva tarea en el navegador.
-- Selección del compresor: abre `/equipos/2` y muestra sus datos.
-- Descripción vacía: muestra el mensaje de validación.
-- Creación de “Inspeccionar generador”: aparece en Tareas asociada al generador.
-- `/equipos/999`: muestra “Equipo no encontrado”.
+`.gitignore` excluye `node_modules/`, `.expo/`, compilaciones, registros y archivos de entorno. `package-lock.json` se incluye para reproducir la instalación.
 
-Estas comprobaciones se realizaron en la versión web. Las capturas documentan ese entorno de ejecución.
-
-## Historial de desarrollo
-
-El historial registra las etapas de configuración, implementación de la navegación, documentación, fijación de dependencias y agregado de capturas. Se puede consultar en [los commits del repositorio](https://github.com/ericVignolo/ProyectoSIGMA/commits/main/) o desde la terminal:
+El historial conserva las etapas de desarrollo y la simplificación de la aplicación. Consultarlo en [GitHub](https://github.com/ericVignolo/ProyectoSIGMA/commits/main/) o ejecutar:
 
 ```bash
 git log --oneline
 ```
 
-## Archivos del repositorio
-
-El repositorio incluye el código fuente, la configuración, este README, las capturas y `package-lock.json` para reproducir las versiones instaladas.
-
-`.gitignore` excluye `node_modules/`, `.expo/`, `dist/`, `web-build/`, archivos de registro y archivos de entorno. Las dependencias se generan localmente al ejecutar `npm install`.
-
-## URL de entrega
+## Entrega
 
 [https://github.com/ericVignolo/ProyectoSIGMA](https://github.com/ericVignolo/ProyectoSIGMA)
