@@ -1,18 +1,12 @@
-import { Text, View } from 'react-native';
-import { Screen, NavButton, styles } from '../components/UI';
-import { useSigma } from '../context/SigmaContext';
-import { equipos } from '../data/equipos';
+import { Link } from 'expo-router';
+import { View, Text } from 'react-native';
 
 export default function Tareas() {
-  const { tareas } = useSigma();
-  return <Screen>
-    <Text style={styles.title}>Tareas de mantenimiento</Text>
-    {tareas.map(tarea => <View key={tarea.id} style={styles.card}>
-      <Text style={styles.heading}>{tarea.titulo}</Text>
-      <Text style={styles.text}>Equipo: {equipos.find(e => e.id === tarea.equipoId)?.nombre}</Text>
-      <Text style={styles.text}>Estado: Pendiente</Text>
-    </View>)}
-    <NavButton href="/nueva-tarea" label="Nueva tarea" />
-    <NavButton href="/" label="Volver al inicio" />
-  </Screen>;
+  return (
+    <View style={{ flex: 1, padding: 24, gap: 16 }}>
+      <Text style={{ fontSize: 24 }}>Tareas</Text>
+      <Text>Esta es la pantalla de tareas de SIGMA.</Text>
+      <Link href="/">Volver al inicio</Link>
+    </View>
+  );
 }
