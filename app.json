@@ -1,0 +1,9 @@
+{
+  "expo": {
+    "name": "SIGMA Navegación",
+    "slug": "sigma-navegacion",
+    "scheme": "sigma",
+    "plugins": ["expo-router"],
+    "web": { "bundler": "metro" }
+  }
+}
