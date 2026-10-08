@@ -1,12 +1,13 @@
+import { styles } from '../styles';
 import { Link } from 'expo-router';
-import { View, Text } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 
 export default function Tareas() {
   return (
-    <View style={{ flex: 1, padding: 24, gap: 16 }}>
-      <Text style={{ fontSize: 24 }}>Tareas</Text>
+    <View style={styles.screen}>
+      <Text style={styles.title}>Tareas</Text>
       <Text>Esta es la pantalla de tareas de SIGMA.</Text>
-      <Link href="/">Volver al inicio</Link>
+      <Link href="/" asChild><Pressable style={styles.button}><Text style={styles.buttonText}>Volver al inicio</Text></Pressable></Link>
     </View>
   );
 }

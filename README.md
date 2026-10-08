@@ -16,7 +16,7 @@ Tareas y Nueva tarea son pantallas de presentación. El alcance de esta activida
 
 ## Tecnologías
 
-React Native, Expo SDK 57, Expo Router, React y TypeScript. Se utilizan componentes básicos y estilos mínimos de separación y tamaño de texto.
+React Native, Expo SDK 57, Expo Router, React y TypeScript. Se utilizan componentes básicos y estilos sencillos: botones con borde, fondo claro y separación entre elementos. Los estilos se comparten desde `styles.ts`.
 
 ## Cómo ejecutarlo
 
@@ -59,6 +59,7 @@ app.json            Configuración de Expo
 package.json        Dependencias y comandos
 package-lock.json   Versiones fijadas de las dependencias
 tsconfig.json       Configuración de TypeScript
+styles.ts           Estilos básicos de las pantallas y botones
 .gitignore          Exclusiones de Git
 ```
 

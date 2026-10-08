@@ -1,12 +1,13 @@
+import { styles } from '../styles';
 import { Link } from 'expo-router';
-import { View, Text } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 
 export default function NuevaTarea() {
   return (
-    <View style={{ flex: 1, padding: 24, gap: 16 }}>
-      <Text style={{ fontSize: 24 }}>Nueva tarea</Text>
+    <View style={styles.screen}>
+      <Text style={styles.title}>Nueva tarea</Text>
       <Text>Esta es la pantalla destinada a crear una nueva tarea.</Text>
-      <Link href="/">Volver al inicio</Link>
+      <Link href="/" asChild><Pressable style={styles.button}><Text style={styles.buttonText}>Volver al inicio</Text></Pressable></Link>
     </View>
   );
 }
