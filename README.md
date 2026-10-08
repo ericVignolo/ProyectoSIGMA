@@ -58,17 +58,24 @@ El formulario permite seleccionar un equipo y guardar una tarea con descripción
 
 ## Capturas de pantalla
 
-Las capturas deben tomarse de la aplicación en ejecución. Antes de entregar, guardarlas en `docs/capturas/` e incluirlas en este README con el siguiente formato:
+Capturas reales de la versión web en ejecución:
 
-```markdown
-![Inicio](docs/capturas/inicio.png)
-![Equipos](docs/capturas/equipos.png)
-![Detalle dinámico](docs/capturas/detalle-equipo.png)
-![Tareas](docs/capturas/tareas.png)
-![Nueva tarea](docs/capturas/nueva-tarea.png)
-```
+![Inicio](docs/capturas/inicio.jpg)
+![Equipos](docs/capturas/equipos.jpg)
+![Detalle dinámico del equipo 2](docs/capturas/detalle-equipo.jpg)
+![Tareas con una nueva tarea guardada](docs/capturas/tareas.jpg)
+![Nueva tarea](docs/capturas/nueva-tarea.jpg)
 
-Esta sección describe las capturas pendientes; no representa evidencia de una ejecución ya verificada.
+## Comprobaciones realizadas
+
+- `npm run typecheck`: sin errores.
+- Navegación desde Inicio a Equipos y Nueva tarea en el navegador.
+- Selección del compresor: abre `/equipos/2` y muestra sus datos.
+- Descripción vacía: muestra el mensaje de validación.
+- Creación de “Inspeccionar generador”: aparece en Tareas asociada al generador.
+- `/equipos/999`: muestra “Equipo no encontrado”.
+
+La verificación visual se realizó en web. La ejecución en un teléfono o emulador queda pendiente.
 
 ## Entrega en GitHub
 
